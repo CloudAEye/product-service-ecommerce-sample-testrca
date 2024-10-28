@@ -1,3 +1,4 @@
+import os
 import unittest
 from typing import Optional
 
@@ -26,10 +27,14 @@ class TestApp(unittest.TestCase):
         app.config['TEST_MODE'] = True
         app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
         cls.app = app.test_client()
-        requests.post('http://localhost:5100/register', json={'username': cls.username, 'password': cls.password})
-        login_response = requests.post('http://localhost:5100/login',
+        user_service_url = os.getenv('USER_SERVICE_URL', '')
+        requests.post(f'{user_service_url}/register', json={'username': cls.username, 'password': cls.password})
+        login_response = requests.post(f'{user_service_url}/login',
                                        json={'username': cls.username, 'password': cls.password})
         cls.access_token = login_response.json().get("access_token", "")
+        with app.app_context():
+            print("Clear orphan products from prev runs (if any)")
+            ProductService().delete_all_products()
 
     def test_01_list_products_endpoint_empty_items(self):
         headers = {

@@ -114,5 +114,7 @@ To run unit tests for each service:
 ```bash
 export FLASK_APP='src/app.py'
 export DATABASE_URL="mysql+pymysql://username:password@hostname:3306/testdb"
+export TEST='TRUE'
+export USER_SERVICE_URL='http://localhost:5100' # Replace with the actual url
 python -m unittest discover tests
 ```

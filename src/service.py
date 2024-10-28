@@ -69,5 +69,4 @@ class ProductService:
 
     def delete_all_products(self):
         result = Product.query.delete()
-        print("delerted : ", result)
         return result
