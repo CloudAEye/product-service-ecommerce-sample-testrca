@@ -2,6 +2,7 @@ import unittest
 
 from src.app import app
 from src.config import SQLALCHEMY_DATABASE_URI
+from src.models import db
 from src.service import ProductService
 
 
@@ -28,6 +29,8 @@ class TestProductService(unittest.TestCase):
         app.config['TEST_MODE'] = True
         app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
         cls.app = app.test_client()
+        with app.app_context():
+            db.create_all()
         # with app.app_context():
         #     print("Delete all products")
         #     cls.service.delete_all_products()
