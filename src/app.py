@@ -68,7 +68,7 @@ def update_product(product_id):
         else:
             return jsonify({'message': 'No product found with given id'}), 404
     except Exception as e:
-        return jsonify({'message': e}), 400
+        return jsonify({'message': e}), 500
 
 
 @app.route('/products/<int:product_id>', methods=['DELETE'])  # Delete
