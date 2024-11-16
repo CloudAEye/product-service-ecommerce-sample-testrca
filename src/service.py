@@ -27,20 +27,21 @@ class ProductService:
         print("Fetching the product with id: " + str(id))
         product = Product.query.get(id)
         if product:
+            # Returning the product
             return {'id': product.id, 'name': product.name, 'description': product.description, 'price': product.price,
                     'quantity': product.quantity}
         return None
 
     def update_product(self, product_id: int, data: dict):
         product = Product.query.get(product_id)
-        print("Updating the product : " + product_id)
+        print("Updating the product : " + str(product_id))
         if product:
             product.name = data.get('name', product.name)
             product.description = data.get('description', product.description)
             product.price = data.get('price', product.price)
             product.quantity = data.get('quantity', product.quantity)
             db.session.commit()
-            print("Product updated successfully")
+            print("Product updated successfully " + product_id)
             return {'id': product.id, 'name': product.name, 'description': product.description, 'price': product.price,
                     'quantity': product.quantity}
         return None
