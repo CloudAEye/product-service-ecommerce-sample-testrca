@@ -1,6 +1,6 @@
 # Demo E-commerce App - Product Microservice
 
-This project demonstrates a simple e-commerce system built using a microservices architecture. It consists of one of the service used by this demo app:
+This project demonstrates a simple e-commerce system built using a micro-services architecture. It consists of one of the service used by this demo app:
 **Product Service**: Manages product information, including creation, updates, and retrieval of product details.
 
 ## Technology Stack
